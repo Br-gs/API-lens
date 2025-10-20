@@ -1,0 +1,36 @@
+# Node
+node_modules/
+.pnpm-store/
+.env
+.env.local
+.env.*.local
+
+# Build / output
+dist/
+build/
+/.turbo
+.vite
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+!.vscode/settings.json
+.vscode/
+.idea/
+*.iml
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Types / temporary
+*.tsbuildinfo
+.cache/
+.cache/
+coverage/
+
+# Editor temp files
+*~
+*.swp

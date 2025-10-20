@@ -1,0 +1,46 @@
+{
+  "name": "api-lens",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@apidevtools/swagger-parser": "^12.1.0",
+    "@monaco-editor/react": "^4.7.0",
+    "@tanstack/react-query": "^5.90.5",
+    "cross-fetch": "^4.1.0",
+    "graphql": "^16.11.0",
+    "graphql-request": "^7.3.1",
+    "js-yaml": "^4.1.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "reactflow": "^11.11.4",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@types/node": "^24.6.0",
+    "@types/react": "^19.1.16",
+    "@types/react-dom": "^19.1.9",
+    "@typescript-eslint/eslint-plugin": "^8.46.2",
+    "@typescript-eslint/parser": "^8.46.2",
+    "@vitejs/plugin-react-swc": "^4.1.0",
+    "eslint-config-standard-with-typescript": "^43.0.1",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^7.2.1",
+    "globals": "^16.4.0",
+    "openapi-typescript": "^7.10.1",
+    "playwright": "^1.56.1",
+    "quicktype-core": "^23.2.6",
+    "ts-standard": "^12.0.2",
+    "typescript": "^5.1.6",
+    "typescript-eslint": "^8.45.0",
+    "vite": "^7.1.7"
+  }
+}

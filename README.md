@@ -22,39 +22,39 @@ Construir una herramienta que demuestre dominio técnico en el manejo de APIs, a
 
 ## 🧩 Principios de Diseño
 
-| Principio | Descripción | Por qué |
-|------------|-------------|----------|
-| **Modularidad** | Separar parsing, visualización y ejecución de requests. | Facilita mantenimiento, tests y escalabilidad. |
-| **Progressive Enhancement** | Soporte mínimo sin spec + mejoras cuando hay OpenAPI/GraphQL. | Cubre más casos reales. |
-| **Seguridad y privacidad** | No almacenar claves ni tokens en texto plano. | Uso responsable con APIs externas. |
-| **UX para desarrolladores** | “Try it”, copiar types, descargar cliente, todo rápido. | Muestra foco en productividad. |
-| **Observabilidad** | Logs, historial local y tests reproducibles. | Refleja profesionalismo y control. |
+|| Principio | Descripción | Por qué |
+||------------|-------------|----------|
+|| **Modularidad** | Separar parsing, visualización y ejecución de requests. | Facilita mantenimiento, tests y escalabilidad. |
+|| **Progressive Enhancement** | Soporte mínimo sin spec + mejoras cuando hay OpenAPI/GraphQL. | Cubre más casos reales. |
+|| **Seguridad y privacidad** | No almacenar claves ni tokens en texto plano. | Uso responsable con APIs externas. |
+|| **UX para desarrolladores** | "Try it", copiar types, descargar cliente, todo rápido. | Muestra foco en productividad. |
+|| **Observabilidad** | Logs, historial local y tests reproducibles. | Refleja profesionalismo y control. |
 
 ---
 
 ### Componentes
-1. **Frontend (SPA)**  
-   - Framework: React + TypeScript (Vite)  
-   - UI: TailwindCSS + shadcn/ui 
-   - Visualización: React Flow (grafo interactivo)  
-   - Estado: React Query + Zustand  
----
+|1. **Frontend (SPA)**  
+|   - Framework: React + TypeScript (Vite)  
+|   - UI: TailwindCSS + shadcn/ui 
+|   - Visualización: React Flow (grafo interactivo)  
+|   - Estado: React Query + Zustand  
+|---
 
 ## ⚙️ Tecnologías Clave
 
-| Tecnología | Propósito |
-|-------------|------------|
-| **React + TypeScript** | Base del frontend con tipado estricto |
-| **Vite** | Dev server rápido y build eficiente |
-| **TailwindCSS** | Estilos utilitarios modernos |
-| **React Flow** | Visualización interactiva de endpoints |
-| **React Query** | Manejo de fetching y caching de datos |
-| **Zustand** | Estado global liviano para la UI |
-| **quicktype-core / openapi-typescript** | Generación automática de tipos |
-| **Vercel Functions** | Proxy serverless sin necesidad de backend permanente |
-| **Jest / Playwright** | Testing unitario y E2E |
-| **ESLint / Prettier / Husky** | Estilo y calidad de código |
-| **Docker** | Reproducibilidad del entorno de desarrollo |
+|| Tecnología | Propósito |
+||-------------|------------|
+|| **React + TypeScript** | Base del frontend con tipado estricto |
+|| **Vite** | Dev server rápido y build eficiente |
+|| **TailwindCSS** | Estilos utilitarios modernos |
+|| **React Flow** | Visualización interactiva de endpoints |
+|| **React Query** | Manejo de fetching y caching de datos |
+|| **Zustand** | Estado global liviano para la UI |
+|| **quicktype-core / openapi-typescript** | Generación automática de tipos |
+|| **Vercel Functions** | Proxy serverless sin necesidad de backend permanente |
+|| **Jest / Playwright** | Testing unitario y E2E |
+|| **ESLint / Prettier / Husky** | Estilo y calidad de código |
+|| **Docker** | Reproducibilidad del entorno de desarrollo |
 
 ---
 
@@ -63,7 +63,7 @@ Construir una herramienta que demuestre dominio técnico en el manejo de APIs, a
 1. El usuario pega una URL o carga un archivo OpenAPI.
 2. El sistema detecta si es REST, OpenAPI o GraphQL.
 3. Se normaliza el spec y se genera un grafo con los endpoints.
-4. El usuario puede probar un endpoint (“Try it”).
+4. El usuario puede probar un endpoint ("Try it").
 5. Se genera código TypeScript a partir de la respuesta o el spec.
 6. El usuario puede copiar o descargar los tipos generados.
 
