@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "lint": "ts-standard",
+    "lint:fix": "ts-standard --fix",
+    "generate:openapi-types": "openapi-typescript ./spec.yaml -o ./src/types/openapi.d.ts",
+    "e2e": "playwright test"
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "^12.1.0",
@@ -23,24 +27,15 @@
     "zustand": "^5.0.8"
   },
   "devDependencies": {
-    "@eslint/js": "^9.36.0",
     "@types/node": "^24.6.0",
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",
-    "@typescript-eslint/eslint-plugin": "^8.46.2",
-    "@typescript-eslint/parser": "^8.46.2",
     "@vitejs/plugin-react-swc": "^4.1.0",
-    "eslint-config-standard-with-typescript": "^43.0.1",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^7.2.1",
-    "globals": "^16.4.0",
     "openapi-typescript": "^7.10.1",
     "playwright": "^1.56.1",
     "quicktype-core": "^23.2.6",
     "ts-standard": "^12.0.2",
-    "typescript": "^5.1.6",
-    "typescript-eslint": "^8.45.0",
+    "typescript": "~5.9.3",
     "vite": "^7.1.7"
   }
 }
