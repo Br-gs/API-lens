@@ -1,13 +1,16 @@
 import { RawApiData } from "../types/api"
 
 export async function fetchRestBasic(url: string): Promise<RawApiData> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 8000);
   try {
 
     const response = await fetch(url, {
       method: 'GET',
       headers: {
         'Accept': 'application/json'
-      }
+      },
+      signal: controller.signal
     })
 
     let data = null
@@ -26,5 +29,7 @@ export async function fetchRestBasic(url: string): Promise<RawApiData> {
 
   } catch (error: any) {
     throw new Error(`Error conectando con API REST: ${error.message}`)
+  } finally {
+    clearTimeout(timeoutId);
   }
 }

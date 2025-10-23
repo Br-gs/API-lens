@@ -2,7 +2,7 @@ export async function isGraphql(url: string): Promise<boolean> {
   const controller = new AbortController();
   const timeout = setTimeout(() => {
     controller.abort();
-  }, 6000);
+  }, 3000);
 
   try {
     const introspectionQuery = {

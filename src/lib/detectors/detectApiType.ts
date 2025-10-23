@@ -3,6 +3,10 @@ import { isGraphql } from './graphql';
 import { findOpenApiSpec } from './openApi';
 
 export async function detectApiType(url: string): Promise<DetectionResult> {
+  if (url.startsWith('http://') && !url.startsWith('https://')) {
+    throw new Error('Invalid URL. Must start with http:// or https://');
+  }
+
   if (await isGraphql(url)) {
     return {
       kind: 'graphql',
