@@ -7,11 +7,16 @@ export async function findOpenApiSpec(url: string): Promise<string | null> {
     '/v3/api-docs',
     '/swagger/v1/swagger.json'
   ]
+  const controller = new AbortController();
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, 8000);
 
   for (const path of commonPaths) {
     try {
       const specUrl = new URL(path, url).toString()
-      const response = await fetch(specUrl)
+      const response = await fetch(specUrl, { signal: controller.signal })
+
       if (!response.ok) continue
 
       const data = await response.json()
@@ -21,6 +26,9 @@ export async function findOpenApiSpec(url: string): Promise<string | null> {
       }
     } catch (error) {
       continue
+
+    } finally {
+      clearTimeout(timeout);
     }
   }
 

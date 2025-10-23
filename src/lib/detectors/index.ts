@@ -6,7 +6,7 @@ export async function detectApiType(url: string): Promise<DetectionResult> {
   if (await isGraphql(url)) {
     return {
       kind: 'graphql',
-      confidence: 'high'
+      apiUrl: url,
     };
   }
 
@@ -14,13 +14,11 @@ export async function detectApiType(url: string): Promise<DetectionResult> {
   if (specUrl) {
     return {
       kind: 'openapi',
-      specUrl,
-      confidence: 'high'
+      apiUrl: specUrl,
     };
   }
 
   return {
     kind: 'manual',
-    confidence: 'low'
   }
 }

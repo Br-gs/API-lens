@@ -1,4 +1,4 @@
-export type specKind = 'openapi' | 'graphql' | 'manual';
+export type apiKind = 'openapi' | 'graphql' | 'manual';
 
 /**
  * Represents an example of an endpoint response
@@ -66,7 +66,7 @@ export interface Endpoint {
  * Represents all information from an API
  */
 export interface ApiSpec {
-  kind: specKind;
+  kind: apiKind;
   title?: string;
   baseUrl?: string;
   endpoints: Endpoint[];
@@ -77,8 +77,14 @@ export interface ApiSpec {
   }
 }
 
-export interface DetectionResult {
-  kind: specKind;
-  specUrl?: string;
-  confidence: 'high' | 'medium' | 'low';
+export type DetectionResult =
+  | { kind: 'graphql'; apiUrl: string }
+  | { kind: 'openapi'; apiUrl: string }
+  | { kind: 'manual';};
+
+export interface RawApiData {
+  kind: apiKind;
+  data: unknown;
+  source: string;
+  format: 'json' | 'yaml' | 'introspection';
 }
