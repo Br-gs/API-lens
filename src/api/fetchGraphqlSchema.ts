@@ -1,5 +1,6 @@
 import { RawApiData } from "../types/api";
 import { getIntrospectionQuery } from 'graphql'
+import { fetchWithTimeout } from "@/utils/fetchWithTimeout";
 
 type GraphQLIntrospectionResult = {
   data?: unknown;
@@ -8,18 +9,15 @@ type GraphQLIntrospectionResult = {
 
 export async function fetchGraphqlSchema(apiUrl: string): Promise<RawApiData> {
   const query = getIntrospectionQuery();
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 6000);
   try {
-    const response = await fetch(apiUrl, {
+    const response = await fetchWithTimeout(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
       body: JSON.stringify({ query }),
-      signal: controller.signal,
-    });
+    }, 5000);
 
     if (!response.ok) {
       throw new Error(`Network response was not ok: ${response.statusText}`);
@@ -40,7 +38,5 @@ export async function fetchGraphqlSchema(apiUrl: string): Promise<RawApiData> {
   } catch (error) {
     throw new Error(`Failed to fetch GraphQL schema: ${error}`);
 
-  } finally {
-    clearTimeout(timeoutId);
   }
 }

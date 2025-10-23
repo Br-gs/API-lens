@@ -1,3 +1,5 @@
+import { fetchWithTimeout } from '@/utils/fetchWithTimeout'
+
 export async function findOpenApiSpec(url: string): Promise<string | null> {
 
   const commonPaths = [
@@ -27,7 +29,7 @@ export async function findOpenApiSpec(url: string): Promise<string | null> {
 async function tryDetectOpenAPI(specUrl: string): Promise<boolean> {
 
   try {
-    const headResponse = await fetch(specUrl, {
+    const headResponse = await fetchWithTimeout(specUrl, {
       method: 'HEAD',
       headers: { 'Accept': 'application/json' }
     }, 3000)
@@ -40,18 +42,23 @@ async function tryDetectOpenAPI(specUrl: string): Promise<boolean> {
       }
     }
   } catch (error) {
-    console.log()
+    if (error instanceof Error) {
+      if (error.name === 'AbortError') {
+        console.log(`⏱️ HEAD timeout after 3s for ${specUrl}`)
+      } else {
+        console.log(`❌ HEAD error: ${error.message}`)
+      }
+    }
   }
 
   try {
-    const getResponse = await fetch(specUrl, {
+    const getResponse = await fetchWithTimeout(specUrl, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
         'Range': 'bytes=0-1023'
-      },
-      signal: controller.signal
-    })
+      }
+    }, 5000)
 
     if (getResponse.status === 206) {
       const partialText = await getResponse.text()
@@ -59,10 +66,29 @@ async function tryDetectOpenAPI(specUrl: string): Promise<boolean> {
         return true
       }
     }
+
+    if (getResponse.status === 200) {
+      const contentType = getResponse.headers.get('content-type')
+
+      if (contentType?.includes('application/json')) {
+        const text = await getResponse.text()
+
+        const preview = text.substring(0, 1000)
+
+        if (preview.includes('"openapi"') || preview.includes('"swagger"')) {
+          return true
+        }
+      }
+    }
+
   } catch (error) {
-    console.log(error)
-  } finally {
-    clearTimeout(timeoutId)
+    if (error instanceof Error) {
+      if (error.name === 'AbortError') {
+        console.log(`⏱️ GET timeout after 5s for ${specUrl}`)
+      } else {
+        console.log(`❌ GET error: ${error.message}`)
+      }
+    }
   }
   return false
 }
