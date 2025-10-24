@@ -22,7 +22,7 @@ export async function fetchGraphqlSchema(apiUrl: string): Promise<RawApiData> {
     if (!response.ok) {
       throw new Error(`Network response was not ok: ${response.statusText}`);
     }
-    const result: unknown = (await response.json());
+    const result: unknown = await response.json();
 
     if (typeof result !== 'object' || result === null || !('data' in result)) {
       throw new Error('No data received from GraphQL introspection query');

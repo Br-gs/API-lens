@@ -13,7 +13,7 @@ export async function fetchOpenApi(apiUrl: string): Promise<RawApiData> {
     if (!response.ok) {
       throw new Error(`Failed to fetch OpenAPI spec from ${apiUrl}: ${response.status} ${response.statusText}`);
     }
-    const data = await response.json();
+    const data: unknown = await response.json();
     return {
       kind: 'openapi',
       data,

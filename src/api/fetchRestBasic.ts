@@ -11,11 +11,16 @@ export async function fetchRestBasic(url: string): Promise<RawApiData> {
       }
     }, 5000)
 
-    let data = null
+    if (!response.ok) {
+      const snippet = await response.text().catch(() => "");
+      throw new Error(`HTTP ${response.status} ${response.statusText} - ${snippet.slice(0, 200)}`);
+    }
+
+    let data: unknown = null
     try {
       data = await response.json()
     } catch {
-      data = { message: 'API responde pero sin JSON válido' }
+      data = { message: 'Response is not valid JSON' }
     }
 
     return {
@@ -25,7 +30,7 @@ export async function fetchRestBasic(url: string): Promise<RawApiData> {
       format: 'json'
     }
 
-  } catch (error: any) {
-    throw new Error(`Error conectando con API REST: ${error.message}`)
+  } catch (error) {
+    throw new Error(`Error conectando con API REST: ${error}`)
   }
 }
