@@ -19,8 +19,9 @@ export async function fetchRestBasic(url: string): Promise<RawApiData> {
     let data: unknown = null
     try {
       data = await response.json()
-    } catch {
-      data = { message: 'Response is not valid JSON' }
+    } catch (parseError) {
+      const rawText = await response.text().catch(() => '[unable to read]')
+      console.warn('Non-JSON response:', rawText.slice(0, 200))
     }
 
     return {
