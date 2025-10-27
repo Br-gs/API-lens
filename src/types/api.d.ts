@@ -80,7 +80,7 @@ export interface ApiSpec {
 export type DetectionResult =
   | { kind: 'graphql'; apiUrl: string }
   | { kind: 'openapi'; apiUrl: string }
-  | { kind: 'manual';};
+  | { kind: 'manual'; apiUrl?: string };
 
 export interface RawApiData {
   kind: apiKind;

@@ -12,7 +12,7 @@
     "lint:fix": "ts-standard --fix",
     "generate:openapi-types": "openapi-typescript ./spec.yaml -o ./src/types/openapi.d.ts",
     "e2e": "playwright test",
-    "test": "jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "^12.1.0",
