@@ -1,8 +1,5 @@
-import { handlers } from '@/mocks/handlers';
-import { setupServer } from 'msw/node';
 import { isGraphql } from '@/lib/detectors/graphql'
-
-const server = setupServer(...handlers);
+import { server } from '@/mocks/server';
 
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());

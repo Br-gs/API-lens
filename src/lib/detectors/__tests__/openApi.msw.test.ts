@@ -1,8 +1,6 @@
-import { handlers } from '@/mocks/handlers';
-import { setupServer } from 'msw/node';
 import { findOpenApiSpec } from '@/lib/detectors/openApi';
+import { server } from '@/mocks/server';
 
-const server = setupServer(...handlers);
 beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }));
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());

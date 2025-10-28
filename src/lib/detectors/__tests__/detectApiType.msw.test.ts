@@ -1,8 +1,5 @@
-import { handlers } from '@/mocks/handlers';
-import { setupServer } from 'msw/node';
 import { detectApiType } from '../detectApiType';
-
-const server = setupServer(...handlers);
+import { server } from '@/mocks/server';
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }));
 afterEach(() => server.resetHandlers());

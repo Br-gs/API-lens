@@ -3,7 +3,6 @@ import { fetchWithTimeout } from "@/utils/fetchWithTimeout"
 
 export async function fetchRestBasic(url: string): Promise<RawApiData> {
   try {
-
     const response = await fetchWithTimeout(url, {
       method: 'GET',
       headers: {
@@ -16,12 +15,14 @@ export async function fetchRestBasic(url: string): Promise<RawApiData> {
       throw new Error(`HTTP ${response.status} ${response.statusText} - ${snippet.slice(0, 200)}`);
     }
 
+    const text = await response.text()
+
     let data: unknown = null
     try {
-      data = await response.json()
+      data = JSON.parse(text)
     } catch (parseError) {
-      const rawText = await response.text().catch(() => '[unable to read]')
-      console.warn('Non-JSON response:', rawText.slice(0, 200))
+      console.warn('Non-JSON response:', text.slice(0, 200))
+      data = null
     }
 
     return {
@@ -32,6 +33,6 @@ export async function fetchRestBasic(url: string): Promise<RawApiData> {
     }
 
   } catch (error) {
-    throw new Error(`Error conectando con API REST: ${error}`)
+    throw new Error(`Error connecting to REST API: ${error}`)
   }
 }
