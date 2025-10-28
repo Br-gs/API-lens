@@ -1,7 +1,7 @@
 import { DetectionResult, RawApiData } from "../types/api";
 import { fetchOpenApi } from "./fetchOpenApi";
 import { fetchRestBasic } from "./fetchRestBasic";
-import { fetchGraphqlSchema } from "./fetchGraphqlSchema";
+import { fetchGraphqlSchema } from "./fetchGraphql";
 
 function assertNever(x: never): never {
   throw new Error(`Unsupported API kind: ${JSON.stringify(x)}`);

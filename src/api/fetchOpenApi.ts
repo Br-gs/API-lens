@@ -16,7 +16,7 @@ export async function fetchOpenApi(apiUrl: string): Promise<RawApiData> {
     const data: unknown = await response.json();
     return {
       kind: 'openapi',
-      data,
+      data: data,
       source: apiUrl,
       format: 'json'
     };
