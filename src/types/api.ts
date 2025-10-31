@@ -73,7 +73,7 @@ export interface ApiSpec {
   types?: Record<string, string>;
   raw?: {
     source?: string;
-    format?: 'json' | 'yaml' | 'instrospection';
+    format?: 'json' | 'yaml' | 'introspection';
   }
 }
 
